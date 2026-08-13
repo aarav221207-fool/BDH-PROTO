@@ -9,6 +9,17 @@ async function startServer() {
 
   app.use(express.json());
 
+  // Enable CORS for external frontend deployments (e.g., Netlify)
+  app.use((_req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+    if (_req.method === "OPTIONS") {
+      return res.sendStatus(200);
+    }
+    next();
+  });
+
   // API endpoint for BDH live analysis
   app.post("/api/analyze", (req, res) => {
     const startTime = Date.now();

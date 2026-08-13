@@ -4,3 +4,9 @@
 
 [build.environment]
   NODE_VERSION = "18"
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://ais-dev-goxv6abvqowmtl3a4ca3xn-70369461618.asia-east1.run.app/api/:splat"
+  status = 200
+  force = true
